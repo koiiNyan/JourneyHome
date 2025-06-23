@@ -89,7 +89,7 @@ public class MonologueManager : MonoBehaviour
 
                 UIHints.Instance.OnMonologueContinue();  // hide hint
 
-                DinoMovement.Instance.AllowMovement();
+                DinoMovement.Instance.OnMonologueEnd();
 
                 if (isIntroMonologue)
                 {

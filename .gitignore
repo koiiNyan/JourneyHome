@@ -1,0 +1,57 @@
+# Unity generated files
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+MemoryCaptures/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# User-specific files
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+
+# Unity auto-generated
+*.swp
+*.bak
+*.orig
+*.old
+
+# JetBrains (Rider)
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+
+# Asset meta and backups
+*.pidb.meta
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.apk
+*.aab
+
+# Exclude native plugins and binaries (optional)
+*.dll
+*.so
+*.dylib
+*.exe
+
+# Builds
+*.apk
+*.aab
+*.unitypackage
