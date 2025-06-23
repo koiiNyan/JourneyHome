@@ -51,14 +51,22 @@ public class Interactable : MonoBehaviour
         if (MonologueManager.Instance.IsMonologueActive())
             return;
 
-        // Show hint when mouse hovers over this entrance object
-        UIHints.Instance.ShowHint(interactableText, UIHints.HintStep.Move);
+        if (GameState.Instance.isStudying)
+            return;
+
+            // Show hint when mouse hovers over this entrance object
+            UIHints.Instance.ShowHint(interactableText, UIHints.HintStep.Move);
     }
 
     void OnMouseExit()
     {
-        // Hide hint when mouse leaves
-        UIHints.Instance.HideHint();
+        if (MonologueManager.Instance.IsMonologueActive())
+            return;
+
+        if (GameState.Instance.isStudying)
+            return;
+            // Hide hint when mouse leaves
+            UIHints.Instance.HideHint();
     }
 
 }

@@ -8,16 +8,24 @@ public class SceneEntrance : MonoBehaviour
     void OnMouseEnter()
     {
         if (MonologueManager.Instance.IsMonologueActive())
-            return; 
+            return;
 
-        // Show hint when mouse hovers over this entrance object
-        UIHints.Instance.ShowHint("Proceed forward to the forest", UIHints.HintStep.Move);
+        if (GameState.Instance.isStudying)
+            return;
+
+            // Show hint when mouse hovers over this entrance object
+            UIHints.Instance.ShowHint("Proceed forward to the forest", UIHints.HintStep.Move);
     }
 
     void OnMouseExit()
     {
-        // Hide hint when mouse leaves
-        UIHints.Instance.HideHint();
+        if (MonologueManager.Instance.IsMonologueActive())
+            return;
+
+        if (GameState.Instance.isStudying)
+            return;
+            // Hide hint when mouse leaves
+            UIHints.Instance.HideHint();
     }
 
     void OnMouseDown()
@@ -25,8 +33,11 @@ public class SceneEntrance : MonoBehaviour
         if (MonologueManager.Instance.IsMonologueActive())
             return; // prevent scene change during dialogue
 
-        // Load target scene on click
-        UIHints.Instance.HideHint();
+        if (GameState.Instance.isStudying)
+            return;
+
+            // Load target scene on click
+            UIHints.Instance.HideHint();
         SceneManager.LoadScene(sceneToLoad);
     }
 }

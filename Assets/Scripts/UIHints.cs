@@ -50,6 +50,9 @@ public class UIHints : MonoBehaviour
     public void OnInteractableClicked()
     {
         if (currentStep == HintStep.Interact)
+        {
             HideHint();
+            GameState.Instance.EndStudying();
+        }
     }
 }
