@@ -29,6 +29,8 @@ public class MonologueManager : MonoBehaviour
     private int index = 0;
     private bool isMonologueActive = false;
 
+    public bool IsMonologueActive() { return isMonologueActive; }
+
     public void StartMonologue(string[] customLines = null, bool isIntro = false)
     {
         index = 0;

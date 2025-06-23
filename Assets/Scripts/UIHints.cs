@@ -10,6 +10,8 @@ public class UIHints : MonoBehaviour
     public enum HintStep { None, Continue, Move, Interact }
     private HintStep currentStep = HintStep.None;
 
+    public bool HasShownGlowingObjectHint { get; private set; } = false;
+
     void Awake()
     {
         Instance = this;
@@ -20,6 +22,7 @@ public class UIHints : MonoBehaviour
         hintText.text = text;
         hintText.gameObject.SetActive(true);
         currentStep = step;
+
     }
 
     public void HideHint()
