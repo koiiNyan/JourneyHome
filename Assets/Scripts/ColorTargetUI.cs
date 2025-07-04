@@ -31,7 +31,7 @@ public class ColorTargetUI : MonoBehaviour, IPointerClickHandler
             if (Vector2.Distance(dinoCurrent, dinoTarget) > 1f)
             {
                 dinoMover.MoveTo(dinoTarget);
-                return; // wait for laser etc later
+                //return; // wait for laser etc later
             }
         }
 
