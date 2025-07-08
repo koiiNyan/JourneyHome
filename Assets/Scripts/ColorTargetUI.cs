@@ -3,43 +3,49 @@ using UnityEngine.EventSystems;
 
 public class ColorTargetUI : MonoBehaviour, IPointerClickHandler
 {
-    public GameObject coloredSprite;  // Assign the colored child image
-    public ReturnColorGameManager manager;  // Assign the central manager
-
+    public GameObject coloredSprite;
+    public ReturnColorGameManager manager;
+    public MiniGameDinoMover dinoMover;
     public Vector2 dinoTargetAnchoredPos = Vector2.zero;
-    public MiniGameDinoMover dinoMover;      // reference to movement script
+    public MiniGameLaserPlayer laserPlayer;
 
+    private bool isColored = false;
 
     public bool willNeedMoreColoring = false;
     [TextArea] public string futureHintText;
 
-    private bool isColored = false;
-
     public void OnPointerClick(PointerEventData eventData)
     {
-        //Debug.Log($"Clicked on: {gameObject.name}");
         if (isColored || manager == null || !manager.IsCorrectColor(this))
             return;
 
         Vector2 dinoCurrent = dinoMover.GetComponent<RectTransform>().anchoredPosition;
-        Vector2 dinoTarget = dinoTargetAnchoredPos;
-
-
-        // Tell Dino to move (only if not already there)
-        if (dinoMover != null && dinoTargetAnchoredPos != null)
+        if (dinoMover != null && Vector2.Distance(dinoCurrent, dinoTargetAnchoredPos) > 1f)
         {
-            if (Vector2.Distance(dinoCurrent, dinoTarget) > 1f)
+            dinoMover.MoveTo(dinoTargetAnchoredPos, () =>
             {
-                dinoMover.MoveTo(dinoTarget);
-                //return; // wait for laser etc later
-            }
+                PlayLaserAndColor();
+            });
         }
+        else
+        {
+            PlayLaserAndColor();
+        }
+    }
 
-
-        // Success!
+    void PlayLaserAndColor()
+    {
         isColored = true;
-        if (coloredSprite != null)
+
+        if (laserPlayer != null)
+        {
+            laserPlayer.coloredSprite = coloredSprite;
+            laserPlayer.PlayLaser();
+        }
+        else if (coloredSprite != null)
+        {
             coloredSprite.SetActive(true);
+        }
 
         Transform glow = transform.Find("GlowRing");
         if (glow != null)

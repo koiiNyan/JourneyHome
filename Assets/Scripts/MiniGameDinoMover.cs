@@ -20,25 +20,22 @@ public class MiniGameDinoMover : MonoBehaviour
         }
     }
 
-    public void MoveTo(Vector2 targetAnchoredPos)
+    public void MoveTo(Vector2 targetAnchoredPos, System.Action onComplete = null)
     {
         if (isMoving) return;
 
-        moveRoutine = StartCoroutine(MoveRoutine(targetAnchoredPos));
+        moveRoutine = StartCoroutine(MoveRoutine(targetAnchoredPos, onComplete));
     }
 
-    IEnumerator MoveRoutine(Vector2 targetPos)
+    IEnumerator MoveRoutine(Vector2 targetPos, System.Action onComplete)
     {
         isMoving = true;
-
-        if (animator != null)
-            animator.SetBool("isMoving", true);
+        if (animator != null) animator.SetBool("isMoving", true);
 
         Vector2 startPos = dino.anchoredPosition;
 
-        // Face direction
         float dx = targetPos.x - startPos.x;
-        if (Mathf.Abs(dx) > 1f) // prevent 0 flipping
+        if (Mathf.Abs(dx) > 1f)
         {
             float scaleX = dx > 0 ? -1f : 1f;
             Vector3 s = dinoVisual.localScale;
@@ -53,10 +50,10 @@ public class MiniGameDinoMover : MonoBehaviour
 
         dino.anchoredPosition = targetPos;
 
-        if (animator != null)
-            animator.SetBool("isMoving", false);
-
+        if (animator != null) animator.SetBool("isMoving", false);
         isMoving = false;
+
+        onComplete?.Invoke();
     }
 
     public bool IsMoving()
