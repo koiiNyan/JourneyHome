@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 public class ReturnColorGameManager : MonoBehaviour
 {
-    public int requiredTargetsCount = 5;
+    public int requiredTargetsCount = 12;
+    public int mistakesOver = 5;
     private int currentCorrect = 0;
     private int currentMistakes = 0;
 
@@ -29,13 +30,19 @@ public class ReturnColorGameManager : MonoBehaviour
 
     void Update()
     {
-        idleTimer += Time.deltaTime;
+        if (currentMistakes <= mistakesOver)
 
-        if (idleTimer >= idleTimeBeforeHint)
         {
-            ShowRandomHint();
-            ResetIdleTimer(); // only once
+            idleTimer += Time.deltaTime;
+
+            if (idleTimer >= idleTimeBeforeHint)
+            {
+                ShowRandomHint();
+                ResetIdleTimer(); // only once
+            }
         }
+
+        
     }
 
 
